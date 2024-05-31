@@ -2,8 +2,7 @@ package previews
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import model.Expense
-import model.ExpenseCategory
+import data.ExpenseManger
 import ui.AllExpensesHeader
 import ui.ExpenseItem
 import ui.ExpensesTotalHeader
@@ -24,12 +23,7 @@ private fun AllExpensesHeaderPrev() {
 @Composable
 private fun ExpenseItemPrev() {
     ExpenseItem(
-        Expense(
-            id = 1L,
-            amount = 87.00,
-            category = ExpenseCategory.PARTY,
-            description = "Weekend party"
-        )
+        ExpenseManger.fakeExpenseList[0]
     ) {}
 }
 

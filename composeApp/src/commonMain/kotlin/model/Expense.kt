@@ -1,6 +1,7 @@
 package model
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.CarRental
 import androidx.compose.material.icons.filled.Coffee
 import androidx.compose.material.icons.filled.Fastfood
 import androidx.compose.material.icons.filled.FoodBank
@@ -23,6 +24,7 @@ enum class ExpenseCategory(val icon: ImageVector) {
     PARTY(Icons.Default.PartyMode),
     SNACKS(Icons.Default.Fastfood),
     COFFEE(Icons.Default.Coffee),
+    CAR(Icons.Default.CarRental),
     HOUSE(Icons.Default.House),
     OTHER(Icons.Default.ViewCozy),
 }
