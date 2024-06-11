@@ -29,12 +29,13 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import data.ExpenseManger
 import getColorsTheme
 import model.Expense
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun ExpensesScreen(modifier: Modifier = Modifier) {
+fun ExpensesScreen(expenseClick: (expense: Expense) -> Unit) {
     val colors = getColorsTheme()
 
     LazyColumn(
@@ -46,7 +47,9 @@ fun ExpensesScreen(modifier: Modifier = Modifier) {
                 AllExpensesHeader()
             }
         }
-        items(emptyList<String>()) {}
+        items(ExpenseManger.fakeExpenseList) { expense ->
+            ExpenseItem(expense, expenseClick)
+        }
     }
 }
 

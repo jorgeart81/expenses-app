@@ -65,4 +65,11 @@ object ExpenseManger {
     fun getCategories(): List<ExpenseCategory> {
         return ExpenseCategory.entries
     }
+
+    fun deleteExpense(expense: Expense): List<Expense> {
+        val index = fakeExpenseList.indexOfFirst { it.id == expense.id }
+        fakeExpenseList.removeAt(index)
+
+        return fakeExpenseList
+    }
 }
