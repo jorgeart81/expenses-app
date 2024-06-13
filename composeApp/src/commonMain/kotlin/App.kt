@@ -1,26 +1,27 @@
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
+import androidx.compose.runtime.getValue
+import data.ExpenseManger
+import data.ExpenseRepositoryImpl
 import moe.tlaster.precompose.PreComposeApp
+import moe.tlaster.precompose.flow.collectAsStateWithLifecycle
+import moe.tlaster.precompose.viewmodel.viewModel
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import presentation.ExpensesUiState
+import presentation.ExpensesViewModel
+import ui.ExpensesScreen
 
 @Composable
 @Preview
 fun App() {
     PreComposeApp {
         val colors = getColorsTheme()
+        val viewModel = viewModel(ExpensesViewModel::class) {
+            ExpensesViewModel(ExpenseRepositoryImpl(ExpenseManger))
+        }
+        val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+
         AppTheme {
-            Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                Column(modifier = Modifier.padding(innerPadding)) {
-                    Text(innerPadding.toString(), color = colors.textColor)
-                    Text("Curso Android Multiplatform", color = colors.textColor)
-                    Text("Curso Android Multiplatform", color = colors.textColor)
-                    Text("Curso Android Multiplatform", color = colors.textColor)
-                }
+            ExpensesScreen(uiState) {
             }
         }
     }

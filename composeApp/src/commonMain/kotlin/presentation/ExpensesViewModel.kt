@@ -8,6 +8,9 @@ import kotlinx.coroutines.launch
 import model.Expense
 import moe.tlaster.precompose.viewmodel.ViewModel
 import moe.tlaster.precompose.viewmodel.viewModelScope
+import kotlin.math.round
+import kotlin.math.roundToInt
+import kotlin.math.roundToLong
 
 data class ExpensesUiState(
     val expenses: List<Expense> = emptyList(),
@@ -25,7 +28,9 @@ class ExpensesViewModel(private val repository: ExpenseRepository) : ViewModel()
 
     private fun updateState() {
         _uiState.update { state ->
-            state.copy(expenses = _allExpense, total = _allExpense.sumOf { it.amount })
+            val total = _allExpense.sumOf { it.amount }
+            val roundTotal = round((total * 1000)) / 1000
+            state.copy(expenses = _allExpense, total = roundTotal)
         }
     }
 

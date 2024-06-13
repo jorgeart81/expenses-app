@@ -39,7 +39,7 @@ object ExpenseManger {
         ),
         Expense(
             id = currentId++,
-            amount = 150.5,
+            amount = 150.889,
             category = ExpenseCategory.OTHER,
             description = "Services"
         ),

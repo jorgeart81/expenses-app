@@ -3,6 +3,7 @@ package previews
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import data.ExpenseManger
+import presentation.ExpensesUiState
 import ui.AllExpensesHeader
 import ui.ExpenseItem
 import ui.ExpensesScreen
@@ -32,7 +33,7 @@ private fun ExpenseItemPrev() {
 @Preview(showBackground = true)
 @Composable
 private fun ExpenseScreenPrev() {
-    ExpensesScreen {
+    ExpensesScreen(uiState = ExpensesUiState(ExpenseManger.fakeExpenseList, 1052.2)) {
     }
 }
 
