@@ -17,14 +17,14 @@ import presentation.ExpensesViewModel
 import ui.ExpensesScreen
 
 @Composable
-fun Navigation(navigator: Navigator) {
+fun Navigation(navigator: Navigator, modifier: Modifier = Modifier) {
     val colors = getColorsTheme()
     val viewModel = viewModel(ExpensesViewModel::class) {
         ExpensesViewModel(ExpenseRepositoryImpl(ExpenseManger))
     }
 
     NavHost(
-        modifier = Modifier.background(colors.backgroundColor),
+        modifier = modifier.background(colors.backgroundColor),
         navigator = navigator,
         initialRoute = Routes.Home.route
     ) {
