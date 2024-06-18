@@ -33,7 +33,8 @@ fun App() {
         val colors = getColorsTheme()
         val navigator = rememberNavigator()
         val titleTopBar = getTitleTopAppBar(navigator)
-        val isEditOrAddExpense = titleTopBar == Routes.AddExpenses.name
+        val isEditOrAddExpense =
+            titleTopBar == Routes.AddExpense.name || titleTopBar == Routes.EditExpenses.name
 
         AppTheme {
             Scaffold(modifier = Modifier.fillMaxSize(),
@@ -64,19 +65,17 @@ fun App() {
                         elevation = 0.dp,
                     )
                 }, floatingActionButton = {
-                    if (!isEditOrAddExpense) {
-                        FloatingActionButton(
-                            onClick = { navigator.navigate(Routes.AddExpenses.route) },
-                            modifier = Modifier.padding(8.dp), shape = RoundedCornerShape(50),
-                            backgroundColor = colors.addIconColor,
-                            contentColor = Color.White
-                        ) {
-                            Icon(
-                                imageVector = Icons.Default.Add,
-                                tint = Color.White,
-                                contentDescription = "Floating icon"
-                            )
-                        }
+                    FloatingActionButton(
+                        onClick = { navigator.navigate(Routes.AddExpense.route) },
+                        modifier = Modifier.padding(8.dp), shape = RoundedCornerShape(50),
+                        backgroundColor = colors.addIconColor,
+                        contentColor = Color.White
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Add,
+                            tint = Color.White,
+                            contentDescription = "Floating icon"
+                        )
                     }
                 }) { paddingValues -> Navigation(navigator, Modifier.padding(paddingValues)) }
         }
@@ -87,7 +86,8 @@ fun App() {
 fun getTitleTopAppBar(navigator: Navigator): String {
     val routes = mapOf(
         Routes.Home.route to Routes.Home.name,
-        Routes.AddExpenses.route to Routes.AddExpenses.name,
+        Routes.AddExpense.route to Routes.AddExpense.name,
+        Routes.EditExpenses.route to Routes.EditExpenses.name,
     )
     val currentRoute = navigator.currentEntry.collectAsState(null).value?.route?.route
     val title = routes[currentRoute]
