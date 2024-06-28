@@ -35,8 +35,8 @@ fun Navigation(navigator: Navigator, modifier: Modifier = Modifier) {
                 navigator.navigate(Routes.EditExpenses.createRoute(expense.id))
             }
         }
-        scene(route = Routes.AddExpense.route) { backStackEntry ->
-            ExpenseDetailScreen() { expense ->
+        scene(route = Routes.AddExpense.route) {
+            ExpenseDetailScreen(null, viewModel.getCategories()) { expense ->
                 viewModel.addExpense(expense)
                 navigator.popBackStack()
             }
@@ -44,7 +44,7 @@ fun Navigation(navigator: Navigator, modifier: Modifier = Modifier) {
         scene(route = Routes.EditExpenses.route) { backStackEntry ->
             val idFromPath = backStackEntry.path<Long>("id")
             val expenseToEdit = idFromPath?.let { id -> viewModel.getExpenseById(id) }
-            ExpenseDetailScreen(expenseToEdit) { expense ->
+            ExpenseDetailScreen(expenseToEdit, viewModel.getCategories()) { expense ->
                 viewModel.editExpense(expense)
                 navigator.popBackStack()
             }
