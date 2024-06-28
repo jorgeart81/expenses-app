@@ -6,11 +6,10 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import model.Expense
+import model.ExpenseCategory
 import moe.tlaster.precompose.viewmodel.ViewModel
 import moe.tlaster.precompose.viewmodel.viewModelScope
 import kotlin.math.round
-import kotlin.math.roundToInt
-import kotlin.math.roundToLong
 
 data class ExpensesUiState(
     val expenses: List<Expense> = emptyList(),
@@ -65,4 +64,6 @@ class ExpensesViewModel(private val repository: ExpenseRepository) : ViewModel()
         return _allExpense.first { it.id == id }
     }
 
+    fun getCategories():List<ExpenseCategory> =
+        repository.getCategories()
 }
