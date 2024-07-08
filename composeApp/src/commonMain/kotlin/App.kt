@@ -64,17 +64,19 @@ fun App() {
                         elevation = 0.dp,
                     )
                 }, floatingActionButton = {
-                    FloatingActionButton(
-                        onClick = { navigator.navigate(Routes.AddExpense.route) },
-                        modifier = Modifier.padding(8.dp), shape = RoundedCornerShape(50),
-                        backgroundColor = colors.addIconColor,
-                        contentColor = Color.White
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Add,
-                            tint = Color.White,
-                            contentDescription = "Floating icon"
-                        )
+                    if (titleTopBar == Routes.Home.name) {
+                        FloatingActionButton(
+                            onClick = { navigator.navigate(Routes.AddExpense.route) },
+                            modifier = Modifier.padding(8.dp), shape = RoundedCornerShape(50),
+                            backgroundColor = colors.addIconColor,
+                            contentColor = Color.White
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Add,
+                                tint = Color.White,
+                                contentDescription = "Floating icon"
+                            )
+                        }
                     }
                 }) { paddingValues -> Navigation(navigator, Modifier.padding(paddingValues)) }
         }
