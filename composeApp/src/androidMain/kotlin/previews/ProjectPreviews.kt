@@ -2,13 +2,12 @@ package previews
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import data.ExpenseManger
+import data.ExpenseManager
 import presentation.ExpensesUiState
 import ui.AllExpensesHeader
 import ui.ExpenseItem
 import ui.ExpensesScreen
 import ui.ExpensesTotalHeader
-import kotlin.math.log
 
 @Preview(showBackground = true)
 @Composable
@@ -26,14 +25,14 @@ private fun AllExpensesHeaderPrev() {
 @Composable
 private fun ExpenseItemPrev() {
     ExpenseItem(
-        ExpenseManger.fakeExpenseList[0]
+        ExpenseManager.fakeExpenseList[0]
     ) {}
 }
 
 @Preview(showBackground = true)
 @Composable
 private fun ExpenseScreenPrev() {
-    ExpensesScreen(uiState = ExpensesUiState(ExpenseManger.fakeExpenseList, 1052.2)) {
+    ExpensesScreen(uiState = ExpensesUiState(ExpenseManager.fakeExpenseList, 1052.2)) {
     }
 }
 

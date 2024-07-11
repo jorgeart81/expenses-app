@@ -4,7 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import data.ExpenseManger
+import data.ExpenseManager
 import data.ExpenseRepositoryImpl
 import getColorsTheme
 import model.Routes
@@ -21,7 +21,7 @@ import ui.ExpensesScreen
 fun Navigation(navigator: Navigator, modifier: Modifier = Modifier) {
     val colors = getColorsTheme()
     val viewModel = viewModel(ExpensesViewModel::class) {
-        ExpensesViewModel(ExpenseRepositoryImpl(ExpenseManger))
+        ExpensesViewModel(ExpenseRepositoryImpl(ExpenseManager))
     }
 
     NavHost(

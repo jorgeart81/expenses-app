@@ -3,7 +3,7 @@ package data
 import model.Expense
 import model.ExpenseCategory
 
-object ExpenseManger {
+object ExpenseManager {
     private var currentId = 1L
 
     val fakeExpenseList = mutableListOf<Expense>(

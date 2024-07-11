@@ -4,7 +4,7 @@ import domain.ExpenseRepository
 import model.Expense
 import model.ExpenseCategory
 
-class ExpenseRepositoryImpl(private val expenseManager: ExpenseManger) : ExpenseRepository {
+class ExpenseRepositoryImpl(private val expenseManager: ExpenseManager) : ExpenseRepository {
     override fun getAllExpenses(): List<Expense> {
         return expenseManager.fakeExpenseList
     }
