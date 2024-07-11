@@ -32,6 +32,10 @@ kotlin {
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
+            // Koin
+            implementation(project.dependencies.platform(libs.koin.bom))
+            implementation(libs.koin.core)
+            implementation(libs.koin.android)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -48,6 +52,12 @@ kotlin {
 //            api(libs.precompose.molecule)
             api(libs.precompose.viewmodel)
 //            api(libs.precompose.koin)
+
+            // Koin
+            implementation(project.dependencies.platform(libs.koin.bom))
+            implementation(libs.koin.core)
+            implementation(libs.koin.compose)
+            api(libs.precompose.koin)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
