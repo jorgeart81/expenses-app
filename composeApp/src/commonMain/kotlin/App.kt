@@ -24,61 +24,64 @@ import moe.tlaster.precompose.navigation.Navigator
 import moe.tlaster.precompose.navigation.rememberNavigator
 import navigation.Navigation
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.koin.compose.KoinContext
+import org.koin.core.context.KoinContext
 
 @Composable
 @Preview
 fun App() {
     PreComposeApp {
-        val colors = getColorsTheme()
-        val navigator = rememberNavigator()
-        val titleTopBar = getTitleTopAppBar(navigator)
-        val isEditOrAddExpense =
-            titleTopBar == Routes.AddExpense.name || titleTopBar == Routes.EditExpenses.name
-
-        AppTheme {
-            Scaffold(modifier = Modifier.fillMaxSize(),
-                topBar = {
-                    TopAppBar(
-                        title = {
-                            Text(
-                                text = titleTopBar, fontSize = 25.sp, color = colors.textColor
-                            )
-                        },
-                        navigationIcon = {
-                            IconButton(onClick = { navigator.popBackStack() }) {
-                                var icon: ImageVector = Icons.AutoMirrored.Filled.ArrowBack
-                                var contentDescription = "Go back icon"
-                                if (!isEditOrAddExpense) {
-                                    icon = Icons.Default.Apps
-                                    contentDescription = "Dashboard icon"
+        KoinContext {
+            val colors = getColorsTheme()
+            val navigator = rememberNavigator()
+            val titleTopBar = getTitleTopAppBar(navigator)
+            val isEditOrAddExpense =
+                titleTopBar == Routes.AddExpense.name || titleTopBar == Routes.EditExpenses.name
+            AppTheme {
+                Scaffold(modifier = Modifier.fillMaxSize(),
+                    topBar = {
+                        TopAppBar(
+                            title = {
+                                Text(
+                                    text = titleTopBar, fontSize = 25.sp, color = colors.textColor
+                                )
+                            },
+                            navigationIcon = {
+                                IconButton(onClick = { navigator.popBackStack() }) {
+                                    var icon: ImageVector = Icons.AutoMirrored.Filled.ArrowBack
+                                    var contentDescription = "Go back icon"
+                                    if (!isEditOrAddExpense) {
+                                        icon = Icons.Default.Apps
+                                        contentDescription = "Dashboard icon"
+                                    }
+                                    Icon(
+                                        imageVector = icon,
+                                        contentDescription = contentDescription,
+                                        modifier = Modifier.padding(16.dp),
+                                        tint = colors.textColor,
+                                    )
                                 }
+                            },
+                            backgroundColor = colors.backgroundColor,
+                            elevation = 0.dp,
+                        )
+                    }, floatingActionButton = {
+                        if (titleTopBar == Routes.Home.name) {
+                            FloatingActionButton(
+                                onClick = { navigator.navigate(Routes.AddExpense.route) },
+                                modifier = Modifier.padding(8.dp), shape = RoundedCornerShape(50),
+                                backgroundColor = colors.addIconColor,
+                                contentColor = Color.White
+                            ) {
                                 Icon(
-                                    imageVector = icon,
-                                    contentDescription = contentDescription,
-                                    modifier = Modifier.padding(16.dp),
-                                    tint = colors.textColor,
+                                    imageVector = Icons.Default.Add,
+                                    tint = Color.White,
+                                    contentDescription = "Floating icon"
                                 )
                             }
-                        },
-                        backgroundColor = colors.backgroundColor,
-                        elevation = 0.dp,
-                    )
-                }, floatingActionButton = {
-                    if (titleTopBar == Routes.Home.name) {
-                        FloatingActionButton(
-                            onClick = { navigator.navigate(Routes.AddExpense.route) },
-                            modifier = Modifier.padding(8.dp), shape = RoundedCornerShape(50),
-                            backgroundColor = colors.addIconColor,
-                            contentColor = Color.White
-                        ) {
-                            Icon(
-                                imageVector = Icons.Default.Add,
-                                tint = Color.White,
-                                contentDescription = "Floating icon"
-                            )
                         }
-                    }
-                }) { paddingValues -> Navigation(navigator, Modifier.padding(paddingValues)) }
+                    }) { paddingValues -> Navigation(navigator, Modifier.padding(paddingValues)) }
+            }
         }
     }
 }
